@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+  <title>Brewed</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/open-sans.css" />
+  <link rel="stylesheet" href="css/ionicons.css" />
+  <link rel="stylesheet" href="css/application.css" />
+</head>
+<body>
+  <div class="col col-left">
+    <ul class="toolbar">
+      <li><h1>Brewed</h1></li>
+      <li class="right"><a data-bind="click: importJson"><i class="ion-ios7-upload-outline"></i></a></li>
+      <li class="right" data-bind="visible: fermentableUses().length > 0 || kettleHopUses().length > 0 || dryHopUses().length > 0"><a data-bind="click: exportJson"><i class="ion-ios7-download-outline"></i></a></li>
+    </ul>
+    <section id="abstract-recipe">
+      <div class="layer1">
+        <table class="soft-bottom">
+          <tr>
+            <td class="span2">
+              <label>Name</label>
+            </td>
+            <td class="span8 input">
+              <input id="name" class="left" data-bind="value: name">
+            </td>
+          </tr>
+          <tr>
+            <td class="span2">
+              <label>Style</label>
+            </td>
+            <td class="span8 input">
+              <select data-bind="options: styles, optionsText: 'name', value: style, event: {change: styleChanged}">
+              </select>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td class="span2">
+              <label>Target OG</label>
+            </td>
+            <td class="span2 input">
+              <input class="tiny" id="og" data-bind="value: og.formatted">
+            </td>
+            <td class="span2">
+            </td>
+            <td class="span2">
+              <label>Target IBU</label>
+            </td>
+            <td class="span2 input">
+              <input class="tiny" id="ibu" data-bind="value: ibu">
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>
+          Base Malts
+          <a href="#" class="add" data-bind="click: addEmptyBaseMalt"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table id="base-malts" data-bind="visible: baseMalts().length > 0">
+          <thead>
+            <tr>
+              <th>% OG</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: baseMalts">
+            <tr>
+              <td class="span2 input">
+                <input data-bind="value: percent">
+              </td>
+              <td class="span8 input">
+                <select class="fermentable" data-bind="options: $parent.fermentables, optionsText: 'name', value: fermentable"></select>
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeBaseMalt"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>
+          Specialty Grains
+          <a href="#" class="add" data-bind="click: addEmptySpecialtyGrain"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table id="specialty-grains"  data-bind="visible: specialtyGrains().length > 0">
+          <thead>
+            <tr>
+              <th>oz/gal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: specialtyGrains">
+            <tr>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: ozPerGal">
+              </td>
+              <td class="span8 input">
+                <select class="fermentable" data-bind="options: $parent.fermentables, optionsText: 'name', value: fermentable"></select>
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeSpecialtyGrain"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>
+          Hops
+          <a href="#" class="add" data-bind="click: addEmptyKettleHop"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table id="hops" data-bind="visible: kettleHops().length > 0">
+          <thead>
+            <tr>
+              <th>% IBU</th>
+              <th>Time</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: kettleHops">
+            <tr>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: percent">
+              </td>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: time">
+              </td>
+              <td class="span6 input">
+                <select class="hop" data-bind="options: $parent.hops, optionsText: 'name', value: hop"></select>
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeKettleHop"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>
+          Dry Hops
+          <a href="#" class="add" data-bind="click: addEmptyDryHop"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table id="dryHops" data-bind="visible: dryHops().length > 0">
+          <thead>
+            <tr>
+              <th>oz/gal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: dryHops">
+            <tr>
+              <td class="span2 input">
+                <input data-bind="value: ozPerGal">
+              </td>
+              <td class="span8 input">
+                <select class="hop" data-bind="options: $parent.hops, optionsText: 'name', value: hop"></select>
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeDryHop"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>Yeast</h3>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="span10 input">
+                <select id="yeast" data-bind="options: yeasts, optionsText: 'name', value: yeast"></select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>Notes</h3>
+        <textarea data-bind="value: notes"></textarea>
+      </div>
+    </section>
+    <section id="brewing-system">
+      <div class="layer1">
+        <h3 class="space">Brewing System</h3>
+        <table>
+          <tr>
+            <td class="span4">
+              <label>Mash Efficiency</label>
+            </td>
+            <td class="span6 input">
+              <input data-bind="value: mashEfficiency">
+            </td>
+          </tr>
+          <tr>
+            <td class="span4">
+              <label>Batch Size</label>
+            </td>
+            <td class="span6 input">
+              <input data-bind="value: batchSize">
+            </td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section id="ingredient-editor" data-bind="event: {change: ingredientsChanged}">
+      <div class="layer1">
+        <h3>
+          Styles
+          <a href="#" class="add" data-bind="click: addStyle"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>OG</th>
+              <th>IBU</th>
+              <th>Color</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: styles">
+            <tr>
+              <td class="span4 input">
+                <input class="left wide" data-bind="value: name">
+              </td>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: og.formatted">
+              </td>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: ibu">
+              </td>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: color">
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeStyle"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>
+          Fermentables
+          <a href="#" class="add" data-bind="click: addFermentable"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>PPG</th>
+              <th>&deg;L</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: fermentables">
+            <tr>
+              <td class="span3 input">
+                <input class="left wide" data-bind="value: name">
+              </td>
+              <td class="span3 input">
+                <select data-bind="options: $parent.fermentableTypes, value: type" />
+              </td>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: ppg">
+              </td>
+              <td class="span2 input">
+                <input class="tiny" data-bind="value: color">
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeFermentable"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>
+          Hops
+          <a href="#" class="add" data-bind="click: addHop"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>% Alpha</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: hops">
+            <tr>
+              <td class="span6 input">
+                <input class="left wide" data-bind="value: name">
+              </td>
+              <td class="span4 input">
+                <input class="tiny" data-bind="value: alpha">
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeHop"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <h3>
+          Yeasts
+          <a href="#" class="add" data-bind="click: addYeast"><i class="icon ion-plus"></i></a>
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Average % Attenuation</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: yeasts">
+            <tr>
+              <td class="span6 input">
+                <input class="left wide" data-bind="value: name">
+              </td>
+              <td class="span4 input">
+                <input class="tiny" data-bind="value: attenuation">
+              </td>
+              <td class="row-control">
+                <a href="#" data-bind="click: $parent.removeYeast"><i class="icon ion-close"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="layer1">
+        <a href="#" class="reset" title="Reset ingredients to defaults" onclick="javascript: var r = confirm('Are you sure?'); if(r === true) { localStorage.clear(); document.location.reload(true); }">Reset Ingredients</a>
+      </div>
+    </section>
+  </div>
+  <div class="col col-right" id="recipe-col">
+    <section id="recipe" data-bind="visible: fermentableUses().length > 0 || kettleHopUses().length > 0 || dryHopUses().length > 0">
+      <h1 data-bind="text: name"></h1>
+      <h2 data-bind="text: style().name"></h2>
+      <dl>
+        <dt>Batch Size</dt>
+        <dd><span data-bind="text: batchSize"></span> gal</dd>
+        <dt>OG</dt>
+        <dd><span data-bind="text: og.formatted"></span></dd>
+        <dt>IBU</dt>
+        <dd><span data-bind="text: ibu"></span></dd>
+        <dt>Mash Efficiency</dt>
+        <dd><span data-bind="text: mashEfficiency"></span>%</dd>
+      </dl>
+      <p class="notes" data-bind="text: notes"></p>
+      <div data-bind="visible: fermentableUses().length > 0">
+        <h3>Fermentables</h3>
+        <table>
+          <tbody data-bind="foreach: fermentableUses">
+            <tr>
+              <td class="span2">
+                <span class="right" data-bind="text: displayAmount"></span> lb
+              </td>
+              <td class="span8">
+                <span data-bind="text: name"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-bind="visible: kettleHopUses().length > 0">
+        <h3>Kettle Hops</h3>
+        <table>
+          <tbody data-bind="foreach: kettleHopUses">
+            <tr>
+              <td class="span2">
+                <span class="right" data-bind="text: displayAmount"></span> oz
+              </td>
+              <td class="span2">
+                <span class="right" data-bind="text: time"></span> min
+              </td>
+              <td class="span6">
+                <span data-bind="text: name"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div data-bind="visible: dryHopUses().length > 0">
+        <h3>Dry Hops</h3>
+        <table>
+          <tbody data-bind="foreach: dryHopUses">
+            <tr>
+              <td class="span2">
+                <span class="right" data-bind="text: displayAmount"></span> oz
+              </td>
+              <td class="span8">
+                <span data-bind="text: name"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Yeast</h3>
+      <table>
+        <tbody data-bind="with: yeast">
+          <tr>
+            <td class="span10">
+              <span data-bind="text: name"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <script src="js/third-party/jquery-2.1.1.min.js"></script>
+  <script src="js/third-party/knockout-2.2.1.js"></script>
+  <script src="js/third-party/knockout-numeric-observable.js"></script>
+
+  <script src="js/brewed/util.js"></script>
+  <script src="js/brewed/modal.js"></script>
+  <script src="js/brewed/seed-data.js"></script>
+  <script src="js/brewed/recipe.js"></script>
+  <script src="js/brewed/recipe-editor-view-model.js"></script>
+  <script src="js/application.js"></script>
+</body>
+</html>

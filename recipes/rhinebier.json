@@ -1,0 +1,69 @@
+{
+  "name":"Rhinebier",
+  "notes":"This is a Kolsch-style ale. Fruity up front, it finishes clean with flashes of yeasty biscuits. Ferment this cool, rack to secondary, and age for at least a month. Ich bin ein Cologner!",
+  "style":{
+    "name":"Kölsch",
+    "og":1.047,
+    "ibu":25,
+    "color":4
+  },
+  "og":1.047,
+  "ibu":25,
+  "abstractIngredients":{
+    "baseMalts":[
+      {
+        "fermentable":{
+          "name":"Pilsen Dry Malt Extract",
+          "ppg":42,
+          "color":2,
+          "type":"Extract"
+        },
+        "percent":92
+      },
+      {
+        "fermentable":{
+          "name":"Munich (Light)",
+          "ppg":37,
+          "color":10,
+          "type":"Kilned Malt"
+        },
+        "percent":8
+      }
+    ],
+    "specialtyGrains":[
+      {
+        "fermentable":{
+          "name":"Caramel/Crystal 10L",
+          "ppg":37,
+          "color":10,
+          "type":"Caramel/Crystal Malt"
+        },
+        "ozPerGal":2.5
+      }
+    ],
+    "kettleHops":[
+      {
+        "hop":{
+          "name":"Mount Hood",
+          "alpha":6.5
+        },
+        "percent":75,
+        "time":40
+      },
+      {
+        "hop":{
+          "name":"Sterling",
+          "alpha":7.5
+        },
+        "percent":25,
+        "time":15
+      }
+    ],
+    "dryHops":[
+    ],
+    "yeast":{
+      "name":"Safale US-05",
+      "attenuation":85.5
+    }
+  }
+}

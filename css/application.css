@@ -1,0 +1,451 @@
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body, input, select {
+  font-family: "OpenSansRegular", sans-serif;
+  font-size: 13px;
+}
+
+pre {
+  display: none;
+  float: left;
+  width: 400px;
+  font-size: 11px;
+  line-height: 13px;
+  color: #aaa;
+}
+
+input,
+select {
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 3px 5px;
+  outline: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100px;
+  padding: 3px 5px;
+  outline: none;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+table {
+  width: 99.999%;
+}
+
+table.soft-bottom {
+  margin-bottom: 30px;
+}
+
+th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 3px 0 3px 5px;
+  color: #666;
+}
+
+td label {
+  font-size: 11px;
+  padding: 3px 0 3px 5px;
+  text-transform: uppercase;
+  color: #666;
+}
+
+table input,
+table select {
+  height: 30px;
+  border: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+table td.input {
+  border: 1px solid #ccc;
+}
+
+table .row-control {
+  padding: 0;
+  width: 30px;
+}
+
+table .row-control:hover {
+}
+
+table .row-control a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #aaa;
+}
+
+table .row-control a:hover {
+  color: #000;
+}
+
+body {
+  line-height: 24px;
+  font-size: 14px;
+}
+
+section {
+  overflow: visible;
+}
+
+.layer0,
+.layer1,
+.layer2 {
+  padding: 30px;
+  border-bottom: 1px solid #DDD;
+}
+
+.layer0 {
+  background: #FAFAFA;
+}
+
+.layer1 {
+  background: #FEFEFE;
+}
+
+.layer2 {
+  background: #FFFFFF;
+}
+
+.icon {
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.col.col-left {
+  width: 60%;
+  border-right: 1px solid #ccc;
+  margin-right: 40%;
+}
+
+.col.col-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+}
+
+h2 {
+  padding: 0 0 20px 0;
+  font-family: "OpenSansSemibold", sans-serif;
+}
+
+h3 {
+  font-family: "OpenSansSemibold", sans-serif;
+}
+
+h3.space {
+  margin-bottom: 25px;
+}
+
+h3 a {
+  text-align: center;
+  float: right;
+  text-transform: uppercase;
+  font-size: 11px;
+  line-height: 24px;
+  width: 30px;
+  color: #aaa;
+}
+
+h3 a:hover {
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a.reset {
+  font-size: 10px;
+  color: #ccc;
+  text-transform: uppercase;
+}
+
+a.reset:hover {
+  color: #888;
+}
+
+.span1 {
+  width: 10%;
+}
+
+.span2 {
+  width: 20%;
+}
+
+.span3 {
+  width: 30%;
+}
+
+.span4 {
+  width: 40%;
+}
+
+.span5 {
+  width: 50%;
+}
+
+.span6 {
+  width: 60%;
+}
+
+.span7 {
+  width: 70%;
+}
+
+.span8 {
+  width: 80%;
+}
+
+.span9 {
+  width: 90%;
+}
+
+.span10 {
+  width: 100%;
+}
+
+.prepend1 {
+  padding-left: 10%;
+}
+
+.prepend2 {
+  padding-left: 20%;
+}
+
+.prepend3 {
+  padding-left: 30px;
+}
+
+.append1 {
+  padding-right: 10%;
+}
+
+.append2 {
+  padding-right: 20%;
+}
+
+.append3 {
+  padding-right: 30px;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+select {
+  width: 100%;
+}
+
+input,
+select {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+select:focus,
+input:focus {
+}
+
+#recipe {
+}
+
+#recipe h1 {
+  font-family: "OpenSansSemibold", sans-serif;
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#recipe p {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+#recipe h3 {
+  font-size: 14px;
+  box-shadow: none;
+}
+
+#recipe h2 {
+  font-family: "OpenSansRegular", sans-serif;
+}
+
+#recipe table {
+  margin-bottom: 15px;
+}
+
+#recipe table th {
+  color: #666;
+}
+
+#recipe table td {
+  font-size: 15px;
+  white-space: nowrap;
+  padding-right: 20px;
+}
+
+#recipe dl {
+  overflow: hidden;
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+#recipe dt,
+#recipe dd {
+  float: left;
+}
+
+#recipe dt {
+  width: 140px;
+  clear: left;
+  color: #555;
+}
+
+#recipe dd {
+  font-weight: bold;
+}
+
+#recipe .notes {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.toolbar {
+  border-bottom: 1px solid #DDD;
+  padding: 20px 0 20px 28px;
+  overflow: hidden;
+}
+
+.toolbar li {
+  float: left;
+}
+
+.toolbar li h1 {
+  font-weight: bold;
+  font-size: 16px;
+  font-family: "OpenSansSemibold", sans-serif;
+}
+
+.toolbar .right {
+  float: right;
+  margin-right: 30px;
+}
+
+.toolbar li a {
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* MODALS */
+
+.modal-container {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  bottom: 40px;
+  left: 40px;
+  background: #fff;
+  padding: 40px;
+}
+
+.modal .modal-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 60px;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal .modal-header h3 {
+  margin-top: 18px;
+  margin-left: 20px;
+}
+
+.modal .modal-body {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 60px;
+  left: 0;
+}
+
+.modal .modal-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.modal .modal-header .btn-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 6;
+  cursor: pointer;
+}
+
+.modal .modal-body textarea {
+  font-size: 14px;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-family: monospace;
+}
+
+.modal .modal-footer {
+  text-align: right;
+}
+
+.modal .modal-footer button {
+  line-height: 30px;
+  margin-top: 14px;
+  margin-right: 20px;
+  padding: 0 20px;
+  border: 0;
+  background: #fff;
+  font-size: 14px;
+  font-family: "OpenSansSemibold", sans-serif;
+  -webkit-appearance: none;
+  outline: 0;
+}
